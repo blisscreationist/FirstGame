@@ -59,13 +59,13 @@ while running:
     screen.blit(target_img, (target_x, target_y))
 
 
-    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+    score_text = font.render(f"Ваши очки: {score}", True, (255, 255, 255))
     screen.blit(score_text, (10, 10))
 
 
     elapsed_time = time.time() - start_time
     remaining_time = max(0, game_time - int(elapsed_time))
-    timer_text = font.render(f"Time: {remaining_time}", True, (255, 255, 255))
+    timer_text = font.render(f"Время: {remaining_time}", True, (255, 255, 255))
     screen.blit(timer_text, (SCREEN_WIDTH - 150, 10))
 
     if remaining_time == 0:
@@ -73,7 +73,7 @@ while running:
 
     pygame.display.update()
 
-print(f"Final Score: {score}")
+print(f"Ваш счет: {score}")
 
 pygame.quit()
 
