@@ -1,5 +1,7 @@
 import pygame
 import random
+import time
+
 
 pygame.init()
 
@@ -18,11 +20,18 @@ target_height = 50
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
-
 font = pygame.font.Font(None, 36)
 
 score = 0
 color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+
+
+game_time = 30
+start_time = time.time()
+
+
+target_speed_x = random.choice([0, 0])
+target_speed_y = random.choice([0, 0])
 
 running = True
 while running:
@@ -38,9 +47,33 @@ while running:
                 color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
                 score += 1
 
+
+    target_x += target_speed_x
+    target_y += target_speed_y
+
+    if target_x <= 0 or target_x >= SCREEN_WIDTH - target_width:
+        target_speed_x = -target_speed_x
+    if target_y <= 0 or target_y >= SCREEN_HEIGHT - target_height:
+        target_speed_y = -target_speed_y
+
     screen.blit(target_img, (target_x, target_y))
+
 
     score_text = font.render(f"Score: {score}", True, (255, 255, 255))
     screen.blit(score_text, (10, 10))
 
+
+    elapsed_time = time.time() - start_time
+    remaining_time = max(0, game_time - int(elapsed_time))
+    timer_text = font.render(f"Time: {remaining_time}", True, (255, 255, 255))
+    screen.blit(timer_text, (SCREEN_WIDTH - 150, 10))
+
+    if remaining_time == 0:
+        running = False
+
     pygame.display.update()
+
+pygame.quit()
+
+
+print(f"Final Score: {score}")
