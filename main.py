@@ -73,7 +73,9 @@ while running:
 
     pygame.display.update()
 
+print(f"Final Score: {score}")
+
 pygame.quit()
 
 
-print(f"Final Score: {score}")
+
